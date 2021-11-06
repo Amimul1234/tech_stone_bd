@@ -7,9 +7,9 @@ package com.techstone.tech_stone_bd_project.constants;
  */
 
 public enum Religion {
-    Islam,
-    Hinduism,
-    Buddhist,
-    Christian,
-    Other
+    ISLAM,
+    HINDUISM,
+    BUDDHISTS,
+    CHRISTIAN,
+    OTHER
 }

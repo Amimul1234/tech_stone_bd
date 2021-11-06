@@ -6,7 +6,9 @@ package com.techstone.tech_stone_bd_project.constants;
  * @Project tech_stone_bd_project
  */
 
-public enum Gender {
-    MALE,
-    FEMALE
+public enum Section {
+    SECTION_A,
+    SECTION_B,
+    SECTION_C,
+    SECTION_D
 }

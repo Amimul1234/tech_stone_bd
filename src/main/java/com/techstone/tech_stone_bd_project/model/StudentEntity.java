@@ -1,14 +1,17 @@
 package com.techstone.tech_stone_bd_project.model;
 
-import com.techstone.tech_stone_bd_project.constants.Gender;
-import com.techstone.tech_stone_bd_project.constants.Religion;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
-import static javax.persistence.EnumType.STRING;
+import static javax.persistence.CascadeType.*;
+import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.AUTO;
 
 /**
@@ -20,34 +23,53 @@ import static javax.persistence.GenerationType.AUTO;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
+@Table(name = "student")
 public class StudentEntity extends AbstractAuditingEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = AUTO)
-    private Long id;
+    @Column(name = "student_id")
+    private Long studentId;
 
-    @Column(nullable = false)
-    private Long rollNumber;
+    @Column(name = "first_name", nullable = false, length = 100)
+    private String firstName;
 
-    @Column(nullable = false, length = 3000)
-    private String name;
+    @Column(name = "last_name", nullable = false, length = 100)
+    private String lastName;
 
-    @Enumerated(value = STRING)
-    @Column(nullable = false)
-    private Gender gender;
-
-    @Enumerated(value = STRING)
-    @Column(nullable = false)
-    private Religion religion;
-
-    @Column(nullable = false, length = 3000)
+    @Column(name = "father_name", nullable = false, length = 500)
     private String fatherName;
 
-    @Column(nullable = false, length = 3000)
+    @Column(name = "mother_name", nullable = false, length = 500)
     private String motherName;
 
-    @Column(length = 15)
+    @Column(name = "image_url", length = 3000)
+    private String imageUrl;
+
+    @Column(name = "date_of_birth", nullable = false)
+    private Date dateOfBirth;
+
+    @Column(name = "join_date", nullable = false)
+    private Date joinDate;
+
+    @Column(name = "mobile_number", length = 15)
     private String mobileNumber;
 
+    @Column(name = "email_id", length = 500)
+    private String emailId;
 
+    @OneToMany(mappedBy = "studentEntity", fetch = LAZY,
+            cascade = {PERSIST, MERGE, DETACH, REFRESH})
+    private List<AttendanceEntity> attendanceEntities = new ArrayList<>();
+
+    @ManyToMany
+    private List<FeeEntity> feeEntities = new ArrayList<>();
+
+    @OneToMany(mappedBy = "studentEntity", fetch = LAZY,
+            cascade = {PERSIST, MERGE, DETACH, REFRESH})
+    private List<ResultEntity> resultEntities = new ArrayList<>();
+
+    @ManyToOne
+    @JsonBackReference
+    private ClassRoomEntity classRoom;
 }
