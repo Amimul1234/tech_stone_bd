@@ -31,7 +31,7 @@ public class AttendanceEntity extends AbstractAuditingEntity implements Serializ
     private Date attendanceDate;
 
     @Column(name = "is_present", nullable = false)
-    private Boolean isPresent;
+    private Boolean isPresent = true;
 
     @Column(name = "remarks", nullable = false, length = 500)
     private String remarks;

@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.CascadeType.*;
@@ -46,10 +47,10 @@ public class ClassRoomEntity extends AbstractAuditingEntity implements Serializa
     @OneToMany(mappedBy = "classRoom", fetch = LAZY,
             cascade = {PERSIST, MERGE, DETACH, REFRESH})
     @JsonManagedReference
-    private List<ExamEntity> examEntities;
+    private List<ExamEntity> examEntities = new ArrayList<>();
 
     @OneToMany(mappedBy = "classRoom", fetch = LAZY,
             cascade = {PERSIST, MERGE, DETACH, REFRESH})
     @JsonManagedReference
-    private List<StudentEntity> studentEntityList;
+    private List<StudentEntity> studentEntityList = new ArrayList<>();
 }
