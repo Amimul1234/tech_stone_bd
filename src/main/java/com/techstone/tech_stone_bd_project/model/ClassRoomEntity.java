@@ -24,7 +24,7 @@ import static javax.persistence.GenerationType.AUTO;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-@Table(name = "class")
+@Table(name = "class_room")
 public class ClassRoomEntity extends AbstractAuditingEntity implements Serializable {
 
     @Id
@@ -33,7 +33,7 @@ public class ClassRoomEntity extends AbstractAuditingEntity implements Serializa
     private Long classId;
 
     @Enumerated(STRING)
-    @Column(name = "group", nullable = false)
+    @Column(name = "class_group", nullable = false)
     private Group group;
 
     @Enumerated(STRING)
