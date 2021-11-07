@@ -27,13 +27,11 @@ public class ClassRoomController {
 
     private final ClassRoomService classRoomService;
 
-    @PostMapping("admin/createNewClass")
+    @PostMapping("admin/create-new-class")
     @ApiOperation(value = "Create a new class",
             notes = "To create a new class one must have 'ADMIN' role",
             response = CommonResponse.class)
     public CommonResponse createNewClass( @Valid @RequestBody ClassRoomDto classRoomDto ) {
         return classRoomService.createNewClass(classRoomDto);
     }
-
-
 }

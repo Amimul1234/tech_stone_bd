@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.time.LocalDateTime;
 
-import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
+import static org.springframework.http.HttpStatus.*;
 
 /**
  * @Author Amimul Ehsan
@@ -30,6 +30,32 @@ public class GlobalExceptionHandler {
         );
 
         return new ResponseEntity<>(commonException, UNPROCESSABLE_ENTITY);
+    }
+
+    @ExceptionHandler(value = AlreadyExistsException.class)
+    public ResponseEntity<Object> alreadyExists( AlreadyExistsException alreadyExistsException ) {
+
+        CommonException commonException = new CommonException(
+                LocalDateTime.now(),
+                CONFLICT,
+                alreadyExistsException.getLocalizedMessage(),
+                alreadyExistsException.toString()
+        );
+
+        return new ResponseEntity<>(commonException, CONFLICT);
+    }
+
+    @ExceptionHandler(value = NotFoundException.class)
+    public ResponseEntity<Object> notFound( NotFoundException notFoundException ) {
+
+        CommonException commonException = new CommonException(
+                LocalDateTime.now(),
+                NOT_FOUND,
+                notFoundException.getLocalizedMessage(),
+                notFoundException.toString()
+        );
+
+        return new ResponseEntity<>(commonException, NOT_FOUND);
     }
 
 }
