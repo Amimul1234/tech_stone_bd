@@ -11,4 +11,6 @@ import com.techstone.tech_stone_bd_project.dto.ClassRoomDto;
 
 public interface ClassRoomService {
     CommonResponse createNewClass( ClassRoomDto classRoomDto );
+
+    CommonResponse assignExamToClass( Long classId, Long examId );
 }
