@@ -17,7 +17,7 @@ import javax.validation.Valid;
  */
 
 @RequiredArgsConstructor
-@RequestMapping("api/v1/")
+@RequestMapping("api/v1")
 @RestController
 @Api(tags = {"Exam management APIs"})
 public class ExamController {

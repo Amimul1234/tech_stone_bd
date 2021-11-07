@@ -32,6 +32,19 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(commonException, UNPROCESSABLE_ENTITY);
     }
 
+    @ExceptionHandler(value = IllegalArgumentException.class)
+    public ResponseEntity<Object> illegalArgumentException( IllegalArgumentException illegalArgumentException ) {
+
+        CommonException commonException = new CommonException(
+                LocalDateTime.now(),
+                UNPROCESSABLE_ENTITY,
+                illegalArgumentException.getLocalizedMessage(),
+                illegalArgumentException.toString()
+        );
+
+        return new ResponseEntity<>(commonException, UNPROCESSABLE_ENTITY);
+    }
+
     @ExceptionHandler(value = AlreadyExistsException.class)
     public ResponseEntity<Object> alreadyExists( AlreadyExistsException alreadyExistsException ) {
 

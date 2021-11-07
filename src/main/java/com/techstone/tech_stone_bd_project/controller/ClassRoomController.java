@@ -17,7 +17,7 @@ import javax.validation.Valid;
  */
 
 @RequiredArgsConstructor
-@RequestMapping("api/v1/")
+@RequestMapping("api/v1")
 @RestController
 @Api(tags = {"Class room management APIs"})
 public class ClassRoomController {
@@ -30,6 +30,14 @@ public class ClassRoomController {
             response = CommonResponse.class)
     public CommonResponse createNewClass( @Valid @RequestBody ClassRoomDto classRoomDto ) {
         return classRoomService.createNewClass(classRoomDto);
+    }
+
+    @GetMapping("get-all-classes")
+    @ApiOperation(value = "Get all available classes",
+            notes = "Get all the available classes present in the system",
+            response = CommonResponse.class)
+    public CommonResponse getAllClasses() {
+        return classRoomService.getAllClasses();
     }
 
     @PutMapping("admin/assign-exam-to-class")

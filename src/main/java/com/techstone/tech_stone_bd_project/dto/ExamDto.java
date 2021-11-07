@@ -1,8 +1,8 @@
 package com.techstone.tech_stone_bd_project.dto;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Date;
@@ -19,11 +19,13 @@ public class ExamDto {
 
     @NotNull
     @Size(max = 400)
-    private String Name;
+    private String name;
 
     @NotNull
-    private Date startDate;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private String startDate;
 
     @NotNull
-    private Date endDate;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private String endDate;
 }

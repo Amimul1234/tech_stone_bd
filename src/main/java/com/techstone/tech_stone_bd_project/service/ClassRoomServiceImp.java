@@ -15,6 +15,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpStatus.OK;
 
@@ -69,5 +71,16 @@ public class ClassRoomServiceImp implements ClassRoomService {
 
         return HttpReqRespUtils.sendResponseToClient(OK, "SUCCESS!",
                 classRoomMapper.entityToDto(response));
+    }
+
+    @Override
+    public CommonResponse getAllClasses() {
+
+        List<ClassRoomDto> classes = classRoomRepo.findAll()
+                .stream()
+                .map(classRoomMapper::entityToDto)
+                .collect(Collectors.toList());
+
+        return HttpReqRespUtils.sendResponseToClient(OK, "SUCCESS!", classes);
     }
 }

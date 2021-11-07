@@ -33,6 +33,9 @@ public class ClassRoomEntity extends AbstractAuditingEntity implements Serializa
     @Column(name = "class_id")
     private Long classId;
 
+    @Column(name = "class_name", nullable = false, length = 500)
+    private String className;
+
     @Enumerated(STRING)
     @Column(name = "class_group", nullable = false)
     private Group group;
@@ -41,7 +44,7 @@ public class ClassRoomEntity extends AbstractAuditingEntity implements Serializa
     @Column(name = "section", nullable = false)
     private Section section;
 
-    @Column(name = "remarks", nullable = false, length = 200)
+    @Column(name = "remarks", length = 200)
     private String remarks;
 
     @OneToMany(mappedBy = "classRoom", fetch = LAZY,

@@ -7,7 +7,6 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.List;
 
 import static javax.persistence.CascadeType.*;
@@ -31,13 +30,13 @@ public class ExamEntity extends AbstractAuditingEntity implements Serializable {
     private Long examId;
 
     @Column(name = "name", nullable = false, length = 400)
-    private String Name;
+    private String name;
 
     @Column(name = "start_date", nullable = false)
-    private Date startDate;
+    private String startDate;
 
     @Column(name = "end_date", nullable = false)
-    private Date endDate;
+    private String endDate;
 
     @OneToMany(mappedBy = "examEntity", fetch = LAZY,
             cascade = {PERSIST, MERGE, DETACH, REFRESH})

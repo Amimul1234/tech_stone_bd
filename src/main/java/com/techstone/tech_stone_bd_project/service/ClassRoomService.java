@@ -13,4 +13,6 @@ public interface ClassRoomService {
     CommonResponse createNewClass( ClassRoomDto classRoomDto );
 
     CommonResponse assignExamToClass( Long classId, Long examId );
+
+    CommonResponse getAllClasses();
 }
