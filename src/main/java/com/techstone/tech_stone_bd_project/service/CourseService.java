@@ -13,4 +13,6 @@ public interface CourseService {
     CommonResponse createNewCourse( CourseDto courseDto );
 
     CommonResponse updateExistingCourse( CourseDto courseDto );
+
+    CommonResponse assignResultToCourse( Long courseId, Long resultId );
 }

@@ -79,8 +79,11 @@ public class ExamServiceImp implements ExamService {
                 new NotFoundException("Course with given id not found"));
 
 
+        courseEntity.setExamEntity(examEntity);
         examEntity.getCourseEntities().add(courseEntity);
+
         AuditingManager.setUpdateAuditingFields(examEntity);
+        AuditingManager.setUpdateAuditingFields(courseEntity);
 
         ExamEntity response = examRepo.save(examEntity);
 

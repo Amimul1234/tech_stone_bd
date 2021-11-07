@@ -39,4 +39,13 @@ public class CourseController {
     public CommonResponse updateExistingCourse( @Valid @RequestBody CourseDto courseDto ) {
         return courseService.updateExistingCourse(courseDto);
     }
+
+    @PutMapping("admin/assign-result-to-course")
+    @ApiOperation(value = "Assign result to exam",
+            notes = "To assign result to course one must have 'ADMIN' role",
+            response = CommonResponse.class)
+    public CommonResponse assignResultToCourse( @RequestParam(name = "courseId") Long courseId,
+                                              @RequestParam(name = "resultId") Long resultId ) {
+        return courseService.assignResultToCourse(courseId, resultId);
+    }
 }
