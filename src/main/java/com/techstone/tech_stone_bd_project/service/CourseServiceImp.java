@@ -2,9 +2,12 @@ package com.techstone.tech_stone_bd_project.service;
 
 import com.techstone.tech_stone_bd_project.common.CommonResponse;
 import com.techstone.tech_stone_bd_project.dto.CourseDto;
+import com.techstone.tech_stone_bd_project.exception.NotFoundException;
 import com.techstone.tech_stone_bd_project.mapper.CourseMapper;
+import com.techstone.tech_stone_bd_project.mapper.ExamMapper;
 import com.techstone.tech_stone_bd_project.model.CourseEntity;
 import com.techstone.tech_stone_bd_project.repositories.CourseRepo;
+import com.techstone.tech_stone_bd_project.repositories.ExamRepo;
 import com.techstone.tech_stone_bd_project.utils.AuditingManager;
 import com.techstone.tech_stone_bd_project.utils.HttpReqRespUtils;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +28,7 @@ import static org.springframework.http.HttpStatus.OK;
 public class CourseServiceImp implements CourseService {
 
     private final CourseRepo courseRepo;
+
     private final CourseMapper courseMapper;
 
     @Override
@@ -45,8 +49,15 @@ public class CourseServiceImp implements CourseService {
     public CommonResponse updateExistingCourse( CourseDto courseDto ) {
         log.debug("CourseServiceImp::updateExistingCourse() method called ... ");
 
+        CourseEntity courseEntity = courseRepo.findById(courseDto.getCourseId()).orElseThrow(() ->
+                new NotFoundException("Course with id : " + courseDto.getCourseId() + " not found"));
 
+        CourseEntity courseEntity1 = courseMapper.dtoToEntity(courseDto);
+        AuditingManager.setUpdateAuditingFields(courseEntity1);
 
-        return null;
+        CourseEntity response = courseRepo.save(courseEntity1);
+
+        return HttpReqRespUtils.sendResponseToClient(OK, "SUCCESS!",
+                courseMapper.entityToDto(response));
     }
 }

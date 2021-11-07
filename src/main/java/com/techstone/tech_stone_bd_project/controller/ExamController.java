@@ -39,4 +39,13 @@ public class ExamController {
     public CommonResponse updateExam( @Valid @RequestBody ExamDto examDto ) {
         return examService.updateExam(examDto);
     }
+
+    @PutMapping("admin/assign-course-to-exam")
+    @ApiOperation(value = "Assign an course to exam",
+            notes = "To assign course to exam one must have 'ADMIN' role",
+            response = CommonResponse.class)
+    public CommonResponse assignCourseToExam( @RequestParam(name = "examId") Long examId,
+                                              @RequestParam(name = "courseId") Long courseId ) {
+        return examService.assignCourseToExam(examId, courseId);
+    }
 }

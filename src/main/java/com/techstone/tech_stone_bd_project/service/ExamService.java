@@ -13,4 +13,6 @@ public interface ExamService {
     CommonResponse createNewExam( ExamDto examDto );
 
     CommonResponse updateExam( ExamDto examDto );
+
+    CommonResponse assignCourseToExam( Long examId, Long courseId );
 }
