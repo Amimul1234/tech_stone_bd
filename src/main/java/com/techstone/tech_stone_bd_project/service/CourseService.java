@@ -1,7 +1,7 @@
 package com.techstone.tech_stone_bd_project.service;
 
 import com.techstone.tech_stone_bd_project.common.CommonResponse;
-import com.techstone.tech_stone_bd_project.dto.ExamDto;
+import com.techstone.tech_stone_bd_project.dto.CourseDto;
 
 /**
  * @Author Amimul Ehsan
@@ -9,8 +9,8 @@ import com.techstone.tech_stone_bd_project.dto.ExamDto;
  * @Project tech_stone_bd_project
  */
 
-public interface ExamService {
-    CommonResponse createNewExam( ExamDto examDto );
+public interface CourseService {
+    CommonResponse createNewCourse( CourseDto courseDto );
 
-    CommonResponse updateExam( ExamDto examDto );
+    CommonResponse updateExistingCourse( CourseDto courseDto );
 }

@@ -1,6 +1,6 @@
 package com.techstone.tech_stone_bd_project.repositories;
 
-import com.techstone.tech_stone_bd_project.model.ClassRoomEntity;
+import com.techstone.tech_stone_bd_project.model.CourseEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public interface CourseRepo extends JpaRepository<ClassRoomEntity, Long> {
+public interface CourseRepo extends JpaRepository<CourseEntity, Long> {
 }

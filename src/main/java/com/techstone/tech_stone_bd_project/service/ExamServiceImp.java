@@ -2,6 +2,7 @@ package com.techstone.tech_stone_bd_project.service;
 
 import com.techstone.tech_stone_bd_project.common.CommonResponse;
 import com.techstone.tech_stone_bd_project.dto.ExamDto;
+import com.techstone.tech_stone_bd_project.exception.NotFoundException;
 import com.techstone.tech_stone_bd_project.mapper.ExamMapper;
 import com.techstone.tech_stone_bd_project.model.ExamEntity;
 import com.techstone.tech_stone_bd_project.repositories.ExamRepo;
@@ -42,8 +43,21 @@ public class ExamServiceImp implements ExamService {
     }
 
     @Override
-    public CommonResponse updateExamName( ExamDto examDto ) {
-        log.debug("ExamServiceImp::updateExamName() method called ... ");
-        return null;
+    public CommonResponse updateExam( ExamDto examDto ) {
+        log.debug("ExamServiceImp::updateExam() method called ... ");
+
+        ExamEntity examEntity = examRepo.findById(examDto.getExamId()).orElseThrow(() ->
+                new NotFoundException("Exam with id: " + examDto.getExamId() + "not found"));
+
+        examEntity.setName(examDto.getName());
+        examEntity.setStartDate(examDto.getStartDate());
+        examEntity.setEndDate(examDto.getEndDate());
+
+        AuditingManager.setUpdateAuditingFields(examEntity);
+
+        ExamEntity response = examRepo.save(examEntity);
+
+        return HttpReqRespUtils.sendResponseToClient(OK, "Exam updated successfully",
+                examMapper.entityToDto(response));
     }
 }

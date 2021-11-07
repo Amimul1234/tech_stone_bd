@@ -32,11 +32,11 @@ public class ExamController {
         return examService.createNewExam(examDto);
     }
 
-    @PutMapping("admin/update-exam-name")
-    @ApiOperation(value = "Update an existing exam name",
-            notes = "To update exam name one must have 'ADMIN' role",
+    @PutMapping("admin/update-exam")
+    @ApiOperation(value = "Update an existing exam",
+            notes = "To update exam one must have 'ADMIN' role",
             response = CommonResponse.class)
-    public CommonResponse updateExamName( @Valid @RequestBody ExamDto examDto ) {
-        return examService.updateExamName(examDto);
+    public CommonResponse updateExam( @Valid @RequestBody ExamDto examDto ) {
+        return examService.updateExam(examDto);
     }
 }

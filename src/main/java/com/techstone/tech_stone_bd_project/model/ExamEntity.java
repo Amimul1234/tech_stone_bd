@@ -45,7 +45,7 @@ public class ExamEntity extends AbstractAuditingEntity implements Serializable {
     private List<CourseEntity> courseEntities;
 
 
-    @OneToMany(mappedBy = "examEntity", fetch = LAZY,
+    @OneToMany(mappedBy = "examEntity", fetch = LAZY, orphanRemoval = true,
             cascade = {PERSIST, MERGE, DETACH, REFRESH})
     @JsonManagedReference
     private List<ResultEntity> resultEntities;

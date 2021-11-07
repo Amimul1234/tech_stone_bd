@@ -34,4 +34,6 @@ public class ClassRoomController {
     public CommonResponse createNewClass( @Valid @RequestBody ClassRoomDto classRoomDto ) {
         return classRoomService.createNewClass(classRoomDto);
     }
+
+
 }
