@@ -1,6 +1,10 @@
 package com.techstone.tech_stone_bd_project.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.techstone.tech_stone_bd_project.constants.Gender;
+import com.techstone.tech_stone_bd_project.constants.Group;
+import com.techstone.tech_stone_bd_project.constants.Religion;
+import com.techstone.tech_stone_bd_project.constants.Section;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -11,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.CascadeType.*;
+import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.AUTO;
 
@@ -57,6 +62,22 @@ public class StudentEntity extends AbstractAuditingEntity implements Serializabl
 
     @Column(name = "email_id", length = 500)
     private String emailId;
+
+    @Enumerated(STRING)
+    @Column(name = "gender", nullable = false)
+    private Gender gender;
+
+    @Enumerated(STRING)
+    @Column(name = "religion", nullable = false)
+    private Religion religion;
+
+    @Enumerated(STRING)
+    @Column(name = "group_name", nullable = false)
+    private Group group;
+
+    @Enumerated(STRING)
+    @Column(name = "section", nullable = false)
+    private Section section;
 
     @OneToMany(mappedBy = "studentEntity", fetch = LAZY,
             cascade = {PERSIST, MERGE, DETACH, REFRESH})

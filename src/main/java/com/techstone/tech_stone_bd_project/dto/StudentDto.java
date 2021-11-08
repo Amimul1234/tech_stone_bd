@@ -57,4 +57,19 @@ public class StudentDto {
     @Email
     @Size(max = 500)
     private String emailId;
+
+    @NotNull
+    private Long classId;
+
+    @NotNull
+    private String gender;
+
+    @NotNull
+    private String religion;
+
+    @NotNull
+    private String group;
+
+    @NotNull
+    private String section;
 }
