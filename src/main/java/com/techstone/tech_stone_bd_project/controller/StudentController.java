@@ -1,9 +1,10 @@
 package com.techstone.tech_stone_bd_project.controller;
 
 import com.techstone.tech_stone_bd_project.common.CommonResponse;
+import com.techstone.tech_stone_bd_project.dto.AttendanceDto;
 import com.techstone.tech_stone_bd_project.dto.StudentDto;
+import com.techstone.tech_stone_bd_project.service.StorageService;
 import com.techstone.tech_stone_bd_project.service.StudentService;
-import com.techstone.tech_stone_bd_project.service.storage.StorageService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -86,4 +87,20 @@ public class StudentController {
         return studentService.getAllStudentRecord(pageNumber, pageSize);
     }
 
+    @GetMapping("admin/get-student-record/{studentId}")
+    @ApiOperation(value = "Get a student record",
+            notes = "To get student record one must have 'ADMIN' role",
+            response = CommonResponse.class)
+    public CommonResponse getStudentRecord( @PathVariable(name = "studentId") Long studentId ) {
+        return studentService.getStudentRecord(studentId);
+    }
+
+    @GetMapping("admin/give-attendance-to-student/{studentId}")
+    @ApiOperation(value = "Give attendance to student",
+            notes = "To give attendance one must have 'ADMIN' role",
+            response = CommonResponse.class)
+    public CommonResponse giveAttendanceToStudent( @PathVariable(name = "studentId") Long studentId,
+                                                   @Valid @RequestBody AttendanceDto attendanceDto ) {
+        return studentService.giveAttendanceToStudent(studentId, attendanceDto);
+    }
 }

@@ -1,6 +1,7 @@
 package com.techstone.tech_stone_bd_project.service;
 
 import com.techstone.tech_stone_bd_project.common.CommonResponse;
+import com.techstone.tech_stone_bd_project.dto.AttendanceDto;
 import com.techstone.tech_stone_bd_project.dto.ClassRoomDto;
 import com.techstone.tech_stone_bd_project.dto.StudentDto;
 
@@ -22,4 +23,8 @@ public interface StudentService  {
     CommonResponse getAllSections();
 
     CommonResponse getAllStudentRecord( int pageNumber, int pageSize );
+
+    CommonResponse giveAttendanceToStudent( Long studentId, AttendanceDto attendanceDto );
+
+    CommonResponse getStudentRecord( Long studentId );
 }

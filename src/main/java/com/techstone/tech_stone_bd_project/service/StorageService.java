@@ -1,4 +1,4 @@
-package com.techstone.tech_stone_bd_project.service.storage;
+package com.techstone.tech_stone_bd_project.service;
 
 import com.techstone.tech_stone_bd_project.common.CommonResponse;
 import org.springframework.web.multipart.MultipartFile;

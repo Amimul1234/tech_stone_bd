@@ -6,7 +6,6 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
 
 import static javax.persistence.GenerationType.AUTO;
 
@@ -28,7 +27,7 @@ public class AttendanceEntity extends AbstractAuditingEntity implements Serializ
     private Long attendanceId;
 
     @Column(name = "attendance_date", nullable = false)
-    private Date attendanceDate;
+    private String attendanceDate;
 
     @Column(name = "is_present", nullable = false)
     private Boolean isPresent = true;

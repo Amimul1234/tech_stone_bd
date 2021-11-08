@@ -1,6 +1,7 @@
 package com.techstone.tech_stone_bd_project.dto;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -18,7 +19,8 @@ public class AttendanceDto {
     private Long attendanceId;
 
     @NotNull
-    private Date attendanceDate;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private String attendanceDate;
 
     @NotNull
     private Boolean isPresent;

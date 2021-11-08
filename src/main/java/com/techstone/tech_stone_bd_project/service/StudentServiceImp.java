@@ -5,10 +5,12 @@ import com.techstone.tech_stone_bd_project.constants.Gender;
 import com.techstone.tech_stone_bd_project.constants.Group;
 import com.techstone.tech_stone_bd_project.constants.Religion;
 import com.techstone.tech_stone_bd_project.constants.Section;
+import com.techstone.tech_stone_bd_project.dto.AttendanceDto;
 import com.techstone.tech_stone_bd_project.dto.StudentDto;
 import com.techstone.tech_stone_bd_project.exception.NotFoundException;
-import com.techstone.tech_stone_bd_project.mapper.ClassRoomMapper;
+import com.techstone.tech_stone_bd_project.mapper.AttendanceMapper;
 import com.techstone.tech_stone_bd_project.mapper.StudentMapper;
+import com.techstone.tech_stone_bd_project.model.AttendanceEntity;
 import com.techstone.tech_stone_bd_project.model.ClassRoomEntity;
 import com.techstone.tech_stone_bd_project.model.StudentEntity;
 import com.techstone.tech_stone_bd_project.repositories.ClassRoomRepo;
@@ -40,6 +42,7 @@ public class StudentServiceImp implements StudentService {
     private final ClassRoomRepo classRoomRepo;
 
     private final StudentMapper studentMapper;
+    private final AttendanceMapper attendanceMapper;
 
     @Transactional
     @Override
@@ -97,6 +100,39 @@ public class StudentServiceImp implements StudentService {
 
         return HttpReqRespUtils.sendResponseToClient(OK, "SUCCESS!",
                 allRecords.map(studentMapper::entityToDto));
+    }
+
+    @Transactional
+    @Override
+    public CommonResponse giveAttendanceToStudent( Long studentId, AttendanceDto attendanceDto ) {
+        log.debug("StudentServiceImp::giveAttendanceToStudent() method called ... ");
+
+        StudentEntity studentEntity = studentRepo.findById(studentId)
+                .orElseThrow(() -> new NotFoundException("Student with given id not found"));
+
+        AttendanceEntity attendanceEntity = attendanceMapper.dtoToEntity(attendanceDto);
+
+        studentEntity.getAttendanceEntities().add(attendanceEntity);
+        attendanceEntity.setStudentEntity(studentEntity);
+
+        AuditingManager.setCreationAuditingFields(attendanceEntity);
+        AuditingManager.setUpdateAuditingFields(studentEntity);
+
+        StudentEntity response = studentRepo.save(studentEntity);
+
+        return HttpReqRespUtils.sendResponseToClient(OK, "SUCCESS!",
+                studentMapper.entityToDto(response));
+    }
+
+    @Override
+    public CommonResponse getStudentRecord( Long studentId ) {
+        log.debug("StudentServiceImp::getStudentRecord() method called ... ");
+
+        StudentEntity studentEntity = studentRepo.findById(studentId)
+                .orElseThrow(() -> new NotFoundException("Student with given id not found"));
+
+        return HttpReqRespUtils.sendResponseToClient(OK, "SUCCESS!",
+                studentMapper.entityToDto(studentEntity));
     }
 
 

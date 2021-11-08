@@ -1,4 +1,4 @@
-package com.techstone.tech_stone_bd_project.service.storage;
+package com.techstone.tech_stone_bd_project.service;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
