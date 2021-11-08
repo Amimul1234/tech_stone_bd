@@ -20,4 +20,6 @@ public interface StudentService  {
     CommonResponse getAllGroups();
 
     CommonResponse getAllSections();
+
+    CommonResponse getAllStudentRecord( int pageNumber, int pageSize );
 }

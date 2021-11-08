@@ -8,7 +8,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.sql.Date;
 
 /**
  * @Author Amimul Ehsan
@@ -26,7 +25,7 @@ public class StudentDto {
     private String firstName;
 
     @NotNull
-    @Size(min = 100)
+    @Size(max = 100)
     private String lastName;
 
     @NotNull
@@ -43,11 +42,11 @@ public class StudentDto {
 
     @NotNull
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date dateOfBirth;
+    private String dateOfBirth;
 
     @NotNull
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date joinDate;
+    private String joinDate;
 
     @NotNull
     @Pattern(regexp = "^(?:\\+88|01)?(?:\\d{11}|\\d{13})$",

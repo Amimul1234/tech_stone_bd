@@ -10,7 +10,6 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,10 +51,10 @@ public class StudentEntity extends AbstractAuditingEntity implements Serializabl
     private String imageUrl;
 
     @Column(name = "date_of_birth", nullable = false)
-    private Date dateOfBirth;
+    private String dateOfBirth;
 
     @Column(name = "join_date", nullable = false)
-    private Date joinDate;
+    private String joinDate;
 
     @Column(name = "mobile_number", length = 15)
     private String mobileNumber;

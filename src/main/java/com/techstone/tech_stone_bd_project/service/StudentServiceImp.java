@@ -17,6 +17,8 @@ import com.techstone.tech_stone_bd_project.utils.AuditingManager;
 import com.techstone.tech_stone_bd_project.utils.HttpReqRespUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -38,7 +40,6 @@ public class StudentServiceImp implements StudentService {
     private final ClassRoomRepo classRoomRepo;
 
     private final StudentMapper studentMapper;
-    private final ClassRoomMapper classRoomMapper;
 
     @Transactional
     @Override
@@ -56,10 +57,10 @@ public class StudentServiceImp implements StudentService {
         AuditingManager.setCreationAuditingFields(studentEntity);
         AuditingManager.setUpdateAuditingFields(classRoom);
 
-        ClassRoomEntity response = classRoomRepo.save(classRoom);
+        classRoomRepo.save(classRoom);
 
         return HttpReqRespUtils.sendResponseToClient(OK, "SUCCESS!",
-                classRoomMapper.entityToDto(response));
+                studentMapper.entityToDto(studentEntity));
     }
 
     @Override
@@ -84,6 +85,18 @@ public class StudentServiceImp implements StudentService {
     public CommonResponse getAllSections() {
         return HttpReqRespUtils.sendResponseToClient(OK, "SUCCESS!",
                 Section.values());
+    }
+
+    @Override
+    public CommonResponse getAllStudentRecord( int pageNumber, int pageSize ) {
+        log.debug("StudentServiceImp::getAllStudentRecord() method called ... ");
+
+        PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
+
+        Page<StudentEntity> allRecords = studentRepo.findAll(pageRequest);
+
+        return HttpReqRespUtils.sendResponseToClient(OK, "SUCCESS!",
+                allRecords.map(studentMapper::entityToDto));
     }
 
 

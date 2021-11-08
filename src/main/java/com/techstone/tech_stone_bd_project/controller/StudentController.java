@@ -76,4 +76,14 @@ public class StudentController {
     public CommonResponse createNewStudentRecord( @Valid @RequestBody StudentDto studentDto ) {
         return studentService.createNewStudentRecord(studentDto);
     }
+
+    @GetMapping("admin/get-all-student-record")
+    @ApiOperation(value = "Get all the student records",
+            notes = "To get all student record one must have 'ADMIN' role",
+            response = CommonResponse.class)
+    public CommonResponse getAllStudentRecord( @RequestParam(name = "pageNumber") int pageNumber,
+                                               @RequestParam(name = "pageSize") int pageSize ) {
+        return studentService.getAllStudentRecord(pageNumber, pageSize);
+    }
+
 }
