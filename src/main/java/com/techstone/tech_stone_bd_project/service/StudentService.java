@@ -3,6 +3,7 @@ package com.techstone.tech_stone_bd_project.service;
 import com.techstone.tech_stone_bd_project.common.CommonResponse;
 import com.techstone.tech_stone_bd_project.dto.AttendanceDto;
 import com.techstone.tech_stone_bd_project.dto.ClassRoomDto;
+import com.techstone.tech_stone_bd_project.dto.FeeDto;
 import com.techstone.tech_stone_bd_project.dto.StudentDto;
 
 /**
@@ -27,4 +28,8 @@ public interface StudentService  {
     CommonResponse giveAttendanceToStudent( Long studentId, AttendanceDto attendanceDto );
 
     CommonResponse getStudentRecord( Long studentId );
+
+    CommonResponse createFeesRecord( Long studentId, FeeDto feeDto );
+
+    CommonResponse getAllFeesRecord( Long studentId );
 }

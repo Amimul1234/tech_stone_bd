@@ -44,7 +44,7 @@ public class FeesController {
     @ApiOperation(value = "Update fee records",
             notes = "To update fee records one must have 'ADMIN' role",
             response = CommonResponse.class)
-    public CommonResponse updateFeeRecords(@Valid @RequestBody FeeDto feeDto) {
+    public CommonResponse updateFeeRecords( @Valid @RequestBody FeeDto feeDto ) {
         return feeService.updateFeeRecords(feeDto);
     }
 }

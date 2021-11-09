@@ -6,14 +6,18 @@ import com.techstone.tech_stone_bd_project.constants.Group;
 import com.techstone.tech_stone_bd_project.constants.Religion;
 import com.techstone.tech_stone_bd_project.constants.Section;
 import com.techstone.tech_stone_bd_project.dto.AttendanceDto;
+import com.techstone.tech_stone_bd_project.dto.FeeDto;
 import com.techstone.tech_stone_bd_project.dto.StudentDto;
+import com.techstone.tech_stone_bd_project.dto.StudentFeesDto;
 import com.techstone.tech_stone_bd_project.exception.NotFoundException;
 import com.techstone.tech_stone_bd_project.mapper.AttendanceMapper;
+import com.techstone.tech_stone_bd_project.mapper.FeeMapper;
+import com.techstone.tech_stone_bd_project.mapper.StudentFeesMapper;
 import com.techstone.tech_stone_bd_project.mapper.StudentMapper;
-import com.techstone.tech_stone_bd_project.model.AttendanceEntity;
-import com.techstone.tech_stone_bd_project.model.ClassRoomEntity;
-import com.techstone.tech_stone_bd_project.model.StudentEntity;
+import com.techstone.tech_stone_bd_project.model.*;
 import com.techstone.tech_stone_bd_project.repositories.ClassRoomRepo;
+import com.techstone.tech_stone_bd_project.repositories.FeeRepo;
+import com.techstone.tech_stone_bd_project.repositories.StudentFeesRepo;
 import com.techstone.tech_stone_bd_project.repositories.StudentRepo;
 import com.techstone.tech_stone_bd_project.utils.AuditingManager;
 import com.techstone.tech_stone_bd_project.utils.HttpReqRespUtils;
@@ -24,6 +28,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpStatus.OK;
 
@@ -40,9 +46,13 @@ public class StudentServiceImp implements StudentService {
 
     private final StudentRepo studentRepo;
     private final ClassRoomRepo classRoomRepo;
+    private final StudentFeesRepo studentFeesRepo;
+    private final FeeRepo feeRepo;
 
     private final StudentMapper studentMapper;
     private final AttendanceMapper attendanceMapper;
+    private final FeeMapper feeMapper;
+    private final StudentFeesMapper studentFeesMapper;
 
     @Transactional
     @Override
@@ -133,6 +143,43 @@ public class StudentServiceImp implements StudentService {
 
         return HttpReqRespUtils.sendResponseToClient(OK, "SUCCESS!",
                 studentMapper.entityToDto(studentEntity));
+    }
+
+    @Override
+    public CommonResponse createFeesRecord( Long studentId, FeeDto feeDto ) {
+
+        StudentEntity studentEntity = studentRepo.findById(studentId).orElseThrow(() ->
+                new NotFoundException("Student with given id not found"));
+
+        FeeEntity feeEntity = feeRepo.findById(feeDto.getFeeId())
+                .orElseThrow(() -> new NotFoundException("Fee with given id not found"));
+
+        StudentFeesEntity studentFeesEntity = new StudentFeesEntity();
+
+        studentFeesEntity.setFeeEntity(feeEntity);
+        studentFeesEntity.setStudentId(studentId);
+
+        AuditingManager.setCreationAuditingFields(studentFeesEntity);
+
+        studentFeesRepo.save(studentFeesEntity);
+
+        return HttpReqRespUtils.sendResponseToClient(OK, "SUCCESS!",
+                feeDto);
+    }
+
+    @Override
+    public CommonResponse getAllFeesRecord( Long studentId ) {
+
+        StudentEntity studentEntity = studentRepo.findById(studentId)
+                .orElseThrow(() -> new NotFoundException("Student with given id not found"));
+
+        List<StudentFeesDto> result = studentFeesRepo.findAll()
+                .stream()
+                .map(studentFeesMapper::entityToDto)
+                .collect(Collectors.toList());
+
+
+        return HttpReqRespUtils.sendResponseToClient(OK, "SUCCESS!", result);
     }
 
 

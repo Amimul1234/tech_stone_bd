@@ -2,6 +2,7 @@ package com.techstone.tech_stone_bd_project.controller;
 
 import com.techstone.tech_stone_bd_project.common.CommonResponse;
 import com.techstone.tech_stone_bd_project.dto.AttendanceDto;
+import com.techstone.tech_stone_bd_project.dto.FeeDto;
 import com.techstone.tech_stone_bd_project.dto.StudentDto;
 import com.techstone.tech_stone_bd_project.service.StorageService;
 import com.techstone.tech_stone_bd_project.service.StudentService;
@@ -104,12 +105,22 @@ public class StudentController {
         return studentService.giveAttendanceToStudent(studentId, attendanceDto);
     }
 
-//    @PutMapping("admin/add-fees-record/{studentId}")
-//    @ApiOperation(value = "Create fees record of student",
-//            notes = "To create fees record one must have 'ADMIN' role",
-//            response = CommonResponse.class)
-//    public CommonResponse createFeesRecord( @PathVariable(name = "studentId") Long studentId,
-//                                                   @Valid @RequestBody FeeDto feeDto ) {
-//        return studentService.createFeesRecord(studentId, attendanceDto);
-//    }
+    @PutMapping("admin/add-fees-record/{studentId}")
+    @ApiOperation(value = "Create fees record of student",
+            notes = "To create fees record one must have 'ADMIN' role",
+            response = CommonResponse.class)
+    public CommonResponse createFeesRecord( @PathVariable(name = "studentId") Long studentId,
+                                            @Valid @RequestBody FeeDto feeDto ) {
+        return studentService.createFeesRecord(studentId, feeDto);
+    }
+
+    @GetMapping("admin/get-fees-records/{studentId}")
+    @ApiOperation(value = "Get all fees record of a student",
+            notes = "To get all fees record one must have 'ADMIN' role",
+            response = CommonResponse.class)
+    public CommonResponse getAllFeesRecords( @PathVariable(name = "studentId") Long studentId ) {
+        return studentService.getAllFeesRecord(studentId);
+    }
+
+
 }
