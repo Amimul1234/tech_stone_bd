@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.attendance</OriginalElement>
+  <nodes>
+    <node x="910.6690192429519" y="386.5742793791575">546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.student</node>
+    <node x="918.1690192429519" y="-39.96452328159643">546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.class_room</node>
+    <node x="1906.266530725372" y="701.0365853658537">546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.student_fee_entities</node>
+    <node x="1470.6401944092488" y="790.9567627494457">546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.attendance</node>
+    <node x="1982.516530725372" y="236.14855875831506">546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.fee</node>
+    <node x="588.5381988438389" y="744.6873614190688">546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.course</node>
+    <node x="571.5381988438389" y="1206.0">546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.result</node>
+    <node x="130.7276785714286" y="328.0">546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.exam_entity</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.student_fee_entities" target="546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.fee" relationship="REFERENCES">
+      <point x="60.75" y="-38.5" />
+      <point x="0.0" y="127.0" />
+    </edge>
+    <edge source="546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.exam_entity" target="546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.class_room" relationship="REFERENCES">
+      <point x="0.0" y="-138.0" />
+      <point x="228.7276785714286" y="302.0" />
+      <point x="1012.1690192429519" y="302.0" />
+      <point x="0.0" y="138.0" />
+    </edge>
+    <edge source="546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.result" target="546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.course" relationship="REFERENCES">
+      <point x="0.0" y="-138.0" />
+      <point x="0.0" y="138.0" />
+    </edge>
+    <edge source="546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.student" target="546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.class_room" relationship="REFERENCES">
+      <point x="0.0" y="-248.0" />
+      <point x="0.0" y="138.0" />
+    </edge>
+    <edge source="546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.attendance" target="546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.student" relationship="REFERENCES">
+      <point x="0.0" y="-138.0" />
+      <point x="1592.1401944092488" y="1180.0" />
+      <point x="1012.1690192429519" y="1180.0" />
+      <point x="0.0" y="248.0" />
+    </edge>
+    <edge source="546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.student_fee_entities" target="546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.student" relationship="REFERENCES">
+      <point x="-60.75" y="-38.5" />
+      <point x="1967.016530725372" y="1180.0" />
+      <point x="1012.1690192429519" y="1180.0" />
+      <point x="0.0" y="248.0" />
+    </edge>
+    <edge source="546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.result" target="546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.student" relationship="REFERENCES">
+      <point x="81.0" y="-138.0" />
+      <point x="774.0381988438389" y="1180.0" />
+      <point x="1012.1690192429519" y="1180.0" />
+      <point x="0.0" y="248.0" />
+    </edge>
+    <edge source="546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.course" target="546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.exam_entity" relationship="REFERENCES">
+      <point x="0.0" y="-138.0" />
+      <point x="693.0381988438389" y="631.0" />
+      <point x="228.7276785714286" y="631.0" />
+      <point x="0.0" y="138.0" />
+    </edge>
+    <edge source="546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.result" target="546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.exam_entity" relationship="REFERENCES">
+      <point x="-81.0" y="-138.0" />
+      <point x="612.0381988438389" y="1180.0" />
+      <point x="188.00000000000006" y="1180.0" />
+      <point x="188.00000000000006" y="631.0" />
+      <point x="228.7276785714286" y="631.0" />
+      <point x="0.0" y="138.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.6005326231691082" showDependencies="false" x="1305.8780487804872" y="681.9999999999997" />
+  <SelectedNodes>
+    <node>546d489c-78d6-4293-b347-fa1594d1f6a1.TABLE:postgres.extensions.attendance</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Columns</Category>
+    <Category>Comments</Category>
+    <Category>Key columns</Category>
+    <Category>Virtual foreign keys</Category>
+  </Categories>
+</Diagram>
+
