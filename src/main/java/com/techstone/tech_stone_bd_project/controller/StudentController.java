@@ -122,5 +122,12 @@ public class StudentController {
         return studentService.getAllFeesRecord(studentId);
     }
 
-
+//    @PutMapping("admin/add-result-record/{studentId}")
+//    @ApiOperation(value = "Create result record for student",
+//            notes = "To create fees record one must have 'ADMIN' role",
+//            response = CommonResponse.class)
+//    public CommonResponse assignResultToStudents( @PathVariable(name = "studentId") Long studentId,
+//                                                  @Valid @RequestBody ResultDto resultDto ) {
+//        return studentService.assignResultToStudents(studentId, resultDto);
+//    }
 }

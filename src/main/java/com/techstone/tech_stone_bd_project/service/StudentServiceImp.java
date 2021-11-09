@@ -5,13 +5,9 @@ import com.techstone.tech_stone_bd_project.constants.Gender;
 import com.techstone.tech_stone_bd_project.constants.Group;
 import com.techstone.tech_stone_bd_project.constants.Religion;
 import com.techstone.tech_stone_bd_project.constants.Section;
-import com.techstone.tech_stone_bd_project.dto.AttendanceDto;
-import com.techstone.tech_stone_bd_project.dto.FeeDto;
-import com.techstone.tech_stone_bd_project.dto.StudentDto;
-import com.techstone.tech_stone_bd_project.dto.StudentFeesDto;
+import com.techstone.tech_stone_bd_project.dto.*;
 import com.techstone.tech_stone_bd_project.exception.NotFoundException;
 import com.techstone.tech_stone_bd_project.mapper.AttendanceMapper;
-import com.techstone.tech_stone_bd_project.mapper.FeeMapper;
 import com.techstone.tech_stone_bd_project.mapper.StudentFeesMapper;
 import com.techstone.tech_stone_bd_project.mapper.StudentMapper;
 import com.techstone.tech_stone_bd_project.model.*;
@@ -51,7 +47,6 @@ public class StudentServiceImp implements StudentService {
 
     private final StudentMapper studentMapper;
     private final AttendanceMapper attendanceMapper;
-    private final FeeMapper feeMapper;
     private final StudentFeesMapper studentFeesMapper;
 
     @Transactional
@@ -148,7 +143,7 @@ public class StudentServiceImp implements StudentService {
     @Override
     public CommonResponse createFeesRecord( Long studentId, FeeDto feeDto ) {
 
-        StudentEntity studentEntity = studentRepo.findById(studentId).orElseThrow(() ->
+        studentRepo.findById(studentId).orElseThrow(() ->
                 new NotFoundException("Student with given id not found"));
 
         FeeEntity feeEntity = feeRepo.findById(feeDto.getFeeId())
@@ -170,7 +165,7 @@ public class StudentServiceImp implements StudentService {
     @Override
     public CommonResponse getAllFeesRecord( Long studentId ) {
 
-        StudentEntity studentEntity = studentRepo.findById(studentId)
+        studentRepo.findById(studentId)
                 .orElseThrow(() -> new NotFoundException("Student with given id not found"));
 
         List<StudentFeesDto> result = studentFeesRepo.findAll()
@@ -182,5 +177,8 @@ public class StudentServiceImp implements StudentService {
         return HttpReqRespUtils.sendResponseToClient(OK, "SUCCESS!", result);
     }
 
-
+    @Override
+    public CommonResponse assignResultToStudents( Long studentId, ResultDto resultDto ) {
+        return null;
+    }
 }
