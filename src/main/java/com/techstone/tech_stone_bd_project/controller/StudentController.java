@@ -95,7 +95,7 @@ public class StudentController {
         return studentService.getStudentRecord(studentId);
     }
 
-    @GetMapping("admin/give-attendance-to-student/{studentId}")
+    @PutMapping("admin/give-attendance-to-student/{studentId}")
     @ApiOperation(value = "Give attendance to student",
             notes = "To give attendance one must have 'ADMIN' role",
             response = CommonResponse.class)
@@ -103,4 +103,13 @@ public class StudentController {
                                                    @Valid @RequestBody AttendanceDto attendanceDto ) {
         return studentService.giveAttendanceToStudent(studentId, attendanceDto);
     }
+
+//    @PutMapping("admin/add-fees-record/{studentId}")
+//    @ApiOperation(value = "Create fees record of student",
+//            notes = "To create fees record one must have 'ADMIN' role",
+//            response = CommonResponse.class)
+//    public CommonResponse createFeesRecord( @PathVariable(name = "studentId") Long studentId,
+//                                                   @Valid @RequestBody FeeDto feeDto ) {
+//        return studentService.createFeesRecord(studentId, attendanceDto);
+//    }
 }
